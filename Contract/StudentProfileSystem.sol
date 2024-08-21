@@ -39,7 +39,7 @@ contract StudentProfileSystem {
         admin = msg.sender;
     }
 
-    // Helper function to convert an address to a hexadecimal string
+    //function to convert an address to a hexadecimal string.
     function toHexString(address _addr) internal pure returns (string memory) {
         bytes memory alphabet = "0123456789abcdef";
         bytes memory data = abi.encodePacked(_addr);
@@ -53,7 +53,7 @@ contract StudentProfileSystem {
         return string(str);
     }
 
-    // Function to generate student ID using year, branch, roll number, and student address
+    // to generate student ID using year, branch, roll number,etc
     function generateStudentId(string memory _year, string memory _branch, string memory _rollNo, address _studentAddress) internal pure returns (string memory) {
         return string(abi.encodePacked("dc", _year, _branch, _rollNo, toHexString(_studentAddress)));
     }
@@ -62,7 +62,7 @@ contract StudentProfileSystem {
     function registerStudent(string memory _name, string memory _year, string memory _branch, string memory _rollNo) public {
         require(bytes(students[msg.sender].studentId).length == 0, "Student already registered");
 
-        // Generate a student ID using the student's address to ensure uniqueness
+        // Generate a student ID
         string memory newStudentId = generateStudentId(_year, _branch, _rollNo, msg.sender);
         require(studentIds[newStudentId] == address(0), "Student ID already exists");
 
